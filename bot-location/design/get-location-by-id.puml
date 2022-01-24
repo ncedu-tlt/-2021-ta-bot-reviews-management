@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor BOT
+entity LocationController
+entity LocationService
+entity LocationRepository
+database DB #grey
+
+BOT -> LocationController : GET getLocationById/{id}
+LocationController -> LocationService: getLocationById(UUID id)
+LocationService -> LocationRepository : findById(UUID locationId)
+LocationRepository <-> DB
+LocationRepository --> LocationService : Location
+LocationService --> LocationController: Location
+LocationController --> BOT : receive Location
+@enduml
