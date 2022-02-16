@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor BOT
+entity AddReviewsController
+entity AddReviwsService
+database DB #grey
+
+BOT -> AddReviewsController : ADD AddReviews/{Review}
+AddReviewsController -> AddReviwsService : ADD AddReviews/{Review}
+AddReviwsService <-> DB
+DB -> AddReviwsService : message "Комментарий добавлен"
+AddReviwsService -> AddReviewsController : message "Комментарий добавлен"
+AddReviewsController -> BOT : message "Комментарий добавлен"
+@enduml
