@@ -1,6 +1,4 @@
-package Review.model;
-
-import lombok.AllArgsConstructor;
+package com.netcracker.edu.review.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
