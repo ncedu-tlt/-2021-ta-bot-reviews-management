@@ -1,16 +1,23 @@
 package com.netcracker.edu.review.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Data
 @Entity
+@Table(name = "Comment")
 public class Review {
+
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+
+    @Column(name = "review")
     private String review;
+
 
 }
 

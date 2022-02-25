@@ -11,6 +11,6 @@ public class ReviewService {
     @Autowired
    private ReviewRepository reviewRepository;
 
-    public Review createReview(Review newReview){return reviewRepository.save(newReview);}
+    public Review createReview(Review newReview){return reviewRepository.saveAndFlush(newReview);}
 
 }
