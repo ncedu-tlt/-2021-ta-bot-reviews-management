@@ -1,7 +1,10 @@
 package com.netcracker.edu.review.model;
 
 import com.netcracker.edu.review.model.ui.UiReview;
+import com.netcracker.edu.review.service.MarkService;
+import com.netcracker.edu.review.service.ReviewService;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,8 +14,8 @@ import java.util.Date;
 @Table(name = "comment")
 public class Review {
 
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "review")
@@ -26,17 +29,19 @@ public class Review {
     private Mark mark;
 
     @Column(name = "date_creation")
-    private Date dateCreation= new Date();
+    private Date dateCreation = new Date();
 
     @Column(name = "date_edit")
-    private Date dateEdit= null;
-    public Review(UiReview uiReview) {
+    private Date dateEdit = null;
+
+    public Review() {
+    }
+
+    public Review(UiReview uiReview, Mark mark) {
         setAuthorId(uiReview.getAuthorId());
         setReview(uiReview.getReview());
-        setMark(new Mark(1, uiReview.getMark()));
+        setMark(mark);
+    }
 
-    }
-    public Review(){
-    }
 }
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UiReview {
+
     private String review;
 
     private int authorId;

@@ -13,4 +13,4 @@ spring:
     password: e16c9038bf270c5b8546946d8420bc212cced20cb6109489403834847e67af0a
 
 server:
-  port: 8088
+  port: 8089
