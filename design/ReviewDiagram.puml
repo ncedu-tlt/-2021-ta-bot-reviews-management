@@ -5,8 +5,9 @@ actor User
 User->PublicGateway: Написать отзыв
 
 PublicGateway->ReviewsService: Передача отзыва
+ReviewsService->ReviewsService: Добавление даты отзыва76
 ReviewsService->Database: Запрос на добавление отзыва
-ReviewsService->ReviewsService: Добавление даты отзыва
+
 ReviewsService->PublicGateway: Сообщение о сохранении отзыва
 PublicGateway->User: Сообщение о сохранении отзыва
 @enduml
