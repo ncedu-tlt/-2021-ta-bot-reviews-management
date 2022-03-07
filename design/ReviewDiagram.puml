@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+User->PublicGateway: Написать отзыв
+
+PublicGateway->ReviewsService: Передача отзыва
+ReviewsService->ReviewsService: Добавление даты отзыва
+ReviewsService->Database: Запрос на добавление отзыва
+
+ReviewsService->PublicGateway: Сообщение о сохранении отзыва
+PublicGateway->User: Сообщение о сохранении отзыва
+@enduml
