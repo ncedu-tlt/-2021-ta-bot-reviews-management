@@ -32,4 +32,11 @@ public class ReviewController {
     public ResponseEntity<List<Review>> findReviewByAuthorId(@PathVariable("authorId") int authorId) {
         return ResponseEntity.ok(reviewService.findReviewByAuthorId(authorId));
     }
+
+    @PutMapping("/change/{id}")
+    public ResponseEntity<Review> updateUserById(@PathVariable("id") int id, @RequestBody UiReview uiReviewUpdated) {
+        Mark mark = markService.findMarkByValue(uiReviewUpdated.getMark());
+        return ResponseEntity.ok(reviewService.updateReviewById(id, uiReviewUpdated, mark));
+    }
+
 }

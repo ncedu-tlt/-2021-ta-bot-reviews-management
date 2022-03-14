@@ -16,6 +16,7 @@ public class Mark {
     @Column(name = "value")
     private String value;
 
+
     public Mark() {
     }
 

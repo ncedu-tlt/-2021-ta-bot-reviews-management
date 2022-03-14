@@ -34,12 +34,16 @@ public class Review {
     @Column(name = "date_edit")
     private Date dateEdit = null;
 
+    @Column(name= "place_id")
+    private int placeId;
+
     public Review() {
     }
 
     public Review(UiReview uiReview, Mark mark) {
         setAuthorId(uiReview.getAuthorId());
         setReview(uiReview.getReview());
+        setPlaceId(uiReview.getPlaceId());
         setMark(mark);
     }
 
