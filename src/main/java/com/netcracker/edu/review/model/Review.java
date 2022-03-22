@@ -1,11 +1,7 @@
 package com.netcracker.edu.review.model;
 
 import com.netcracker.edu.review.model.ui.UiReview;
-import com.netcracker.edu.review.service.MarkService;
-import com.netcracker.edu.review.service.ReviewService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -34,12 +30,16 @@ public class Review {
     @Column(name = "date_edit")
     private Date dateEdit = null;
 
+    @Column(name= "place_id")
+    private int placeId;
+
     public Review() {
     }
 
     public Review(UiReview uiReview, Mark mark) {
         setAuthorId(uiReview.getAuthorId());
         setReview(uiReview.getReview());
+        setPlaceId(uiReview.getPlaceId());
         setMark(mark);
     }
 
