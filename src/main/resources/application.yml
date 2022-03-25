@@ -11,6 +11,12 @@ spring:
     url: jdbc:postgresql://ec2-54-195-141-170.eu-west-1.compute.amazonaws.com:5432/dc138t0pvcvmvv
     username: ngdcxakprmgfom
     password: e16c9038bf270c5b8546946d8420bc212cced20cb6109489403834847e67af0a
-
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 5
+      max-lifetime: 10000
+      idle-timeout: 30000
+      connection-timeout: 10000
+      pool-name: HikariPool
 server:
-  port: 8089
+  port: 8088

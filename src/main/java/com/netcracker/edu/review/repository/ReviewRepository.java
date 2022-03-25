@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
-        List<Review> findReviewByAuthorId(int authorId);
+    List<Review> findReviewByAuthorId(int authorId);
+    List<Review> findReviewByPlaceId(int placeId);
 }
