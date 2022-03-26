@@ -4,6 +4,8 @@ import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import  com.netcracker.edu.review.model.Mark;
 import java.util.Date;
@@ -25,7 +27,9 @@ public class ReviewService {
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
-    public List<Review> findReviewByAuthorId(int authorId) {return reviewRepository.findReviewByAuthorId(authorId);}
+    public List<Review> findReviewByAuthorId(int authorId, int size) {
+        Pageable pageable = PageRequest.ofSize(size);
+        return reviewRepository.findReviewByAuthorId(authorId, pageable);}
 
     public List<Review> findReviewByPlaceId(int placeId) {
         return reviewRepository.findReviewByPlaceId(placeId);
