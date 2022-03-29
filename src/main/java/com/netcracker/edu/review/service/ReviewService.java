@@ -37,6 +37,11 @@ public class ReviewService {
         return reviewRepository.findReviewByPlaceId(placeId, pageable);
     }
 
+    public List<Review> findReviewByPlaceIdandAuthorId(int placeId,int authorId, int page) {
+        Pageable pageable = PageRequest.of(page, 5,  Sort.by("dateCreation").descending());
+        return reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
+    }
+
     public Review updateReviewById(int id, UiReview uiReviewUpdated, Mark mark) {
 
         mark = markService.findMarkByValue(uiReviewUpdated.getMark());
