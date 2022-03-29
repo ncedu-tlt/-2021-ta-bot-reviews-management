@@ -6,6 +6,7 @@ import com.netcracker.edu.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import  com.netcracker.edu.review.model.Mark;
 import java.util.Date;
@@ -27,12 +28,13 @@ public class ReviewService {
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
-    public List<Review> findReviewByAuthorId(int authorId, int size) {
-        Pageable pageable = PageRequest.ofSize(size);
+    public List<Review> findReviewByAuthorId(int authorId, int page) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("dateCreation").descending());
         return reviewRepository.findReviewByAuthorId(authorId, pageable);}
 
-    public List<Review> findReviewByPlaceId(int placeId) {
-        return reviewRepository.findReviewByPlaceId(placeId);
+    public List<Review> findReviewByPlaceId(int placeId, int page) {
+        Pageable pageable = PageRequest.of(page, 5,  Sort.by("dateCreation").descending());
+        return reviewRepository.findReviewByPlaceId(placeId, pageable);
     }
 
     public Review updateReviewById(int id, UiReview uiReviewUpdated, Mark mark) {
