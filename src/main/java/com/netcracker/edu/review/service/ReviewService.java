@@ -23,10 +23,10 @@ public class ReviewService {
     private MarkService markService;
 
     @Value("${countOfReviews.size-of-page}")
-    public int size_of_page;
+    public int sizeOfPage;
 
     @Value("${countOfReviews.date-creation}")
-    public String date_of_creation;
+    public String dateOfCreation;
 
     public Review createReview(UiReview uiReview, Mark mark) {
 
@@ -36,17 +36,17 @@ public class ReviewService {
     }
 
     public List<Review> findReviewByAuthorId(int authorId,int page) {
-        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
 
       return reviewRepository.findReviewByAuthorId(authorId, pageable);}
 
     public List<Review> findReviewByPlaceId(int placeId, int page) {
-        Pageable pageable = PageRequest.of(page, size_of_page,  Sort.by(date_of_creation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage,  Sort.by(dateOfCreation).descending());
         return reviewRepository.findReviewByPlaceId(placeId, pageable);
     }
 
     public List<Review> findReviewByPlaceIdAndAuthorId(int placeId,int authorId, int page) {
-        Pageable pageable = PageRequest.of(page, size_of_page,  Sort.by(date_of_creation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage,  Sort.by(dateOfCreation).descending());
         return reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
     }
 
