@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "avg")
+@Table(name = "rating")
 public class Rating {
 
     @Id
