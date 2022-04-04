@@ -20,3 +20,7 @@ spring:
       pool-name: HikariPool
 server:
   port: 8088
+
+countOfReviews:
+  size-of-page: 5
+  date-creation: dateCreation

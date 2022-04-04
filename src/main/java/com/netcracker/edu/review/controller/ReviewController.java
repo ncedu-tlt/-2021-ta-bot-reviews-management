@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -25,14 +26,19 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(uiReview, mark));
     }
 
-    @GetMapping("/author/{authorId}")
-    public ResponseEntity<List<Review>> findReviewByAuthorId(@PathVariable("authorId") int authorId) {
-        return ResponseEntity.ok(reviewService.findReviewByAuthorId(authorId));
+    @GetMapping("/author/{authorId}/{page}")
+    public ResponseEntity<List<Review>> findReviewByAuthorId(@PathVariable("authorId") int authorId, @PathVariable("page") int page) {
+        return ResponseEntity.ok(reviewService.findReviewByAuthorId(authorId, page));
     }
 
-    @GetMapping("/place/{placeId}")
-    public ResponseEntity<List<Review>> findReviewByPlaceId(@PathVariable("placeId") int placeId) {
-        return ResponseEntity.ok(reviewService.findReviewByPlaceId(placeId));
+    @GetMapping("/place/{placeId}/{page}")
+    public ResponseEntity<List<Review>> findReviewByPlaceId(@PathVariable("placeId") int placeId, @PathVariable("page") int page) {
+        return ResponseEntity.ok(reviewService.findReviewByPlaceId(placeId, page));
+    }
+
+    @GetMapping("/place/{placeId}/{authorId}/{page}")
+    public ResponseEntity<List<Review>> findReviewByPlaceIdAndAuthorId(@PathVariable("placeId") int placeId, @PathVariable("authorId") int authorId, @PathVariable("page") int page) {
+        return ResponseEntity.ok(reviewService.findReviewByPlaceIdandAuthorId(placeId, authorId, page));
     }
 
     @PutMapping("/review/{id}")
@@ -40,11 +46,15 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.updateReviewById(id, uiReviewUpdated, mark));
     }
 
-
     @DeleteMapping("/review/{id}")
     public ResponseEntity<HttpStatus> deleteReviewById(@PathVariable("id") int id) {
-        reviewService.deleteReviewByid(id);
+        reviewService.deleteReviewById(id);
         return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/review/{markId}/{page}")
+    public ResponseEntity<List<Review>> SortedByRating(@PathVariable("markId") int markId, @PathVariable("page") int page){
+        return ResponseEntity.ok(reviewService.findReviewByMarkId(markId, page));
     }
 
 }

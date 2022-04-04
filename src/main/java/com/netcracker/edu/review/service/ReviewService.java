@@ -1,9 +1,15 @@
 package com.netcracker.edu.review.service;
 
+import com.netcracker.edu.review.error.ReviewByRatingNotFoundException;
+import com.netcracker.edu.review.error.ReviewNotFoundException;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import  com.netcracker.edu.review.model.Mark;
 import java.util.Date;
@@ -18,17 +24,45 @@ public class ReviewService {
     @Autowired
     private MarkService markService;
 
+    @Autowired
+    private RatingSevice ratingSevice;
+
+    @Value("${countOfReviews.size-of-page}")
+    public int size_of_page;
+
+    @Value("${countOfReviews.date-creation}")
+    public String date_of_creation;
+
     public Review createReview(UiReview uiReview, Mark mark) {
 
+        if(uiReview.getMark() != null) {
+            ratingSevice.setRating(uiReview, mark);
+        }
         mark = markService.findMarkByValue(uiReview.getMark());
 
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
-    public List<Review> findReviewByAuthorId(int authorId) {return reviewRepository.findReviewByAuthorId(authorId);}
+    public List<Review> findReviewByAuthorId(int authorId, int page) {
+        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+        if(reviewRepository.findReviewByAuthorId(authorId, pageable).isEmpty()){
+            throw new ReviewNotFoundException();
+        } else return reviewRepository.findReviewByAuthorId(authorId, pageable);}
 
-    public List<Review> findReviewByPlaceId(int placeId) {
-        return reviewRepository.findReviewByPlaceId(placeId);
+
+
+    public List<Review> findReviewByPlaceId(int placeId, int page) {
+        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+        if(reviewRepository.findReviewByPlaceId(placeId, pageable).isEmpty()){
+            throw new ReviewNotFoundException();
+        } else return reviewRepository.findReviewByPlaceId(placeId, pageable);
+    }
+
+    public List<Review> findReviewByPlaceIdandAuthorId(int placeId,int authorId, int page) {
+        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+        if(reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable).isEmpty()){
+            throw new ReviewNotFoundException();
+        } else return reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
     }
 
     public Review updateReviewById(int id, UiReview uiReviewUpdated, Mark mark) {
@@ -47,9 +81,19 @@ public class ReviewService {
 
     }
 
-    public void deleteReviewByid(int id) {
-        reviewRepository.deleteById(id);
-        }
+    public void deleteReviewById(int id) {
+        if(reviewRepository.findById(id).isPresent()){
+            throw new ReviewNotFoundException();
+        } else reviewRepository.deleteById(id);
+    }
+
+    public List<Review> findReviewByMarkId(int markId, int page){
+        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+        if(reviewRepository.findReviewByMark_Id(markId, pageable).isEmpty()){
+            throw new ReviewByRatingNotFoundException(Integer.toString(markId));
+        } else return reviewRepository.findReviewByMark_Id(markId, pageable);
+    }
+
 }
 
 
