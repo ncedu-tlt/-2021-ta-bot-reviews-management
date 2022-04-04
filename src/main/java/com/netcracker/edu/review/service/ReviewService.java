@@ -4,6 +4,7 @@ import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,12 @@ public class ReviewService {
     @Autowired
     private MarkService markService;
 
+    @Value("${countOfReviews.size-of-page}")
+    public int size_of_page;
+
+    @Value("${countOfReviews.date-creation}")
+    public String date_of_creation;
+
     public Review createReview(UiReview uiReview, Mark mark) {
 
         mark = markService.findMarkByValue(uiReview.getMark());
@@ -28,17 +35,18 @@ public class ReviewService {
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
-    public List<Review> findReviewByAuthorId(int authorId, int page) {
-        Pageable pageable = PageRequest.of(page, 5, Sort.by("dateCreation").descending());
-        return reviewRepository.findReviewByAuthorId(authorId, pageable);}
+    public List<Review> findReviewByAuthorId(int authorId,int page) {
+        Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
+
+      return reviewRepository.findReviewByAuthorId(authorId, pageable);}
 
     public List<Review> findReviewByPlaceId(int placeId, int page) {
-        Pageable pageable = PageRequest.of(page, 5,  Sort.by("dateCreation").descending());
+        Pageable pageable = PageRequest.of(page, size_of_page,  Sort.by(date_of_creation).descending());
         return reviewRepository.findReviewByPlaceId(placeId, pageable);
     }
 
-    public List<Review> findReviewByPlaceIdandAuthorId(int placeId,int authorId, int page) {
-        Pageable pageable = PageRequest.of(page, 5,  Sort.by("dateCreation").descending());
+    public List<Review> findReviewByPlaceIdAndAuthorId(int placeId,int authorId, int page) {
+        Pageable pageable = PageRequest.of(page, size_of_page,  Sort.by(date_of_creation).descending());
         return reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
     }
 

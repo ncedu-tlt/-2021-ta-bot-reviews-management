@@ -37,7 +37,7 @@ public class ReviewController {
 
     @GetMapping("/place/{placeId}/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceIdAndAuthorId(@PathVariable("placeId") int placeId, @PathVariable("authorId") int authorId, @PathVariable("page") int page) {
-        return ResponseEntity.ok(reviewService.findReviewByPlaceIdandAuthorId(placeId,authorId,page));
+        return ResponseEntity.ok(reviewService.findReviewByPlaceIdAndAuthorId(placeId,authorId,page));
     }
 
     @PutMapping("/review/{id}")
