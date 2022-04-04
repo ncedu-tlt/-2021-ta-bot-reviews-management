@@ -1,7 +1,7 @@
 package com.netcracker.edu.review.service;
 
-import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Mark;
+import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,36 +15,36 @@ public class RatingSevice {
 
     public void setRating(UiReview uiReview, Mark mark) {
 
-        Rating average = ratingRepository.findAverageById(uiReview.getPlaceId());
+        Rating rating = ratingRepository.findAverageById(uiReview.getPlaceId());
 
-        if (average == null) {
-            createRating(mark, average);
+        if (rating == null) {
+            createRating(mark, uiReview);
         } else {
-            updateRating(mark, average);
+            updateRating(mark, rating);
         }
 
     }
 
-    public void createRating(Mark mark, Rating average) {
+    public void createRating(Mark mark, UiReview uiReview) {
+        Rating rating = new Rating();
+        rating.setAverage(mark.getId());
+        rating.setSum(mark.getId());
+        rating.setNumber(1);
+        rating.setId(uiReview.getPlaceId());
 
-        average.setAverage(mark.getId());
-        average.setSum(mark.getId());
-        average.setNumber(1);
-        average.setId(mark.getId());
-
-        ratingRepository.save(average);
+        ratingRepository.save(rating);
     }
 
-    public void updateRating(Mark mark, Rating average) {
+    public void updateRating(Mark mark, Rating rating) {
 
-        int sum = (average.getSum() + mark.getId());
-        int numb = average.getNumber() + 1;
+        int sum = (rating.getSum() + mark.getId());
+        int numb = rating.getNumber() + 1;
         double aveRage = (float) sum / (float) numb;
 
-        average.setAverage(Math.round(aveRage * 100.0) / 100.0);
-        average.setSum(sum);
-        average.setNumber(numb);
+        rating.setAverage(Math.round(aveRage * 100.0) / 100.0);
+        rating.setSum(sum);
+        rating.setNumber(numb);
 
-        ratingRepository.save(average);
+        ratingRepository.save(rating);
     }
 }
