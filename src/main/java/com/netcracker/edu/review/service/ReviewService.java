@@ -47,24 +47,27 @@ public class ReviewService {
 
     public List<Review> findReviewByAuthorId(int authorId, int page) {
         Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
-        if (reviewRepository.findReviewByAuthorId(authorId, pageable).isEmpty()) {
+        List<Review> review = reviewRepository.findReviewByAuthorId(authorId, pageable);
+        if (review.isEmpty()) {
             throw new ReviewNotFoundException();
-        } else return reviewRepository.findReviewByAuthorId(authorId, pageable);
+        } else return review;
     }
 
 
     public List<Review> findReviewByPlaceId(int placeId, int page) {
         Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
-        if (reviewRepository.findReviewByPlaceId(placeId, pageable).isEmpty()) {
+        List<Review> reviews = reviewRepository.findReviewByPlaceId(placeId, pageable);
+        if (reviews.isEmpty()) {
             throw new ReviewNotFoundException();
-        } else return reviewRepository.findReviewByPlaceId(placeId, pageable);
+        } else return reviews;
     }
 
     public List<Review> findReviewByPlaceIdandAuthorId(int placeId, int authorId, int page) {
         Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
-        if (reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable).isEmpty()) {
+        List<Review> review = reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
+        if (review.isEmpty()) {
             throw new ReviewNotFoundException();
-        } else return reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
+        } else return review;
     }
 
     public Review updateReviewById(int id, UiReview uiReviewUpdated, Mark mark) {
@@ -76,6 +79,7 @@ public class ReviewService {
             review.setReview(uiReviewUpdated.getReview());
         }
         if (uiReviewUpdated.getMark() != null) {
+            ratingSevice.updateRatingWithRaview(review, mark);
             review.setMark(mark);
         }
         review.setDateEdit(new Date());
@@ -84,16 +88,21 @@ public class ReviewService {
     }
 
     public void deleteReviewById(int id) {
-        if (reviewRepository.findById(id).isPresent()) {
+        if (!reviewRepository.findById(id).isPresent()) {
             throw new ReviewNotFoundException();
-        } else reviewRepository.deleteById(id);
+        } else {
+            Review review = reviewRepository.findById(id).get();
+            ratingSevice.deleteRatingWithRaview(review);
+            reviewRepository.deleteById(id);
+        }
     }
 
     public List<Review> findReviewByMarkId(int markId, int page) {
         Pageable pageable = PageRequest.of(page, size_of_page, Sort.by(date_of_creation).descending());
-        if (reviewRepository.findReviewByMark_Id(markId, pageable).isEmpty()) {
+        List<Review> review = reviewRepository.findReviewByMark_Id(markId, pageable);
+        if (review.isEmpty()) {
             throw new ReviewByRatingNotFoundException(Integer.toString(markId));
-        } else return reviewRepository.findReviewByMark_Id(markId, pageable);
+        } else return review;
     }
 
 }
