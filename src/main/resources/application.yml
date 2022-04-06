@@ -4,23 +4,16 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     generate-ddl: true
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-54-195-141-170.eu-west-1.compute.amazonaws.com:5432/dc138t0pvcvmvv
-    username: ngdcxakprmgfom
-    password: e16c9038bf270c5b8546946d8420bc212cced20cb6109489403834847e67af0a
-    hikari:
-      minimum-idle: 3
-      maximum-pool-size: 5
-      max-lifetime: 10000
-      idle-timeout: 30000
-      connection-timeout: 10000
-      pool-name: HikariPool
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123
 server:
-  port: 8088
+  port: 8085
 
-countOfReviews:
+count-of-reviews:
   size-of-page: 5
   date-creation: dateCreation

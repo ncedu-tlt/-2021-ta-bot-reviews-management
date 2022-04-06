@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ReviewAdvice {
+public class ExceptHandler {
 
     @ExceptionHandler
     @ResponseBody
@@ -15,6 +15,7 @@ public class ReviewAdvice {
     String reviewNotFoundException (ReviewNotFoundException reviewNotFoundException){
         return reviewNotFoundException.getMessage();
     }
+
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
