@@ -79,7 +79,7 @@ public class ReviewService {
             review.setReview(uiReviewUpdated.getReview());
         }
         if (uiReviewUpdated.getMark() != null) {
-            ratingSevice.updateRatingWithRaview(review, mark);
+            ratingSevice.updateRatingWithReview(review, mark);
             review.setMark(mark);
         }
         review.setDateEdit(new Date());
@@ -92,7 +92,7 @@ public class ReviewService {
             throw new ReviewNotFoundException();
         } else {
             Review review = reviewRepository.findById(id).get();
-            ratingSevice.deleteRatingWithRaview(review);
+            ratingSevice.deleteRatingWithReview(review);
             reviewRepository.deleteById(id);
         }
     }

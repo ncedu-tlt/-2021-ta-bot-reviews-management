@@ -21,7 +21,7 @@ public class RatingSevice {
         if (rating == null) {
             createRating(mark, uiReview);
         } else {
-            updateRatingWhenCreatRaview(mark, rating);
+            updateRatingWhenCreatReview(mark, rating);
         }
 
     }
@@ -37,7 +37,7 @@ public class RatingSevice {
         ratingRepository.save(rating);
     }
 
-    public void updateRatingWhenCreatRaview(Mark mark, Rating rating) {
+    public void updateRatingWhenCreatReview(Mark mark, Rating rating) {
 
         int sum = (rating.getSum() + mark.getId());
         int numb = rating.getNumber() + 1;
@@ -51,12 +51,13 @@ public class RatingSevice {
         ratingRepository.save(rating);
     }
 
-    public void updateRatingWithRaview(Review review, Mark mark) {
+    public void updateRatingWithReview(Review review, Mark mark) {
 
         Rating rating = ratingRepository.findAverageById(review.getPlaceId());
 
         int sum = (rating.getSum() - review.getMark().getId() + mark.getId());
         int numb = rating.getNumber();
+
         double aveRage = (float) sum / (float) numb;
 
         rating.setAverage(Math.round(aveRage * 100.0) / 100.0);
@@ -66,12 +67,13 @@ public class RatingSevice {
 
     }
 
-    public void deleteRatingWithRaview(Review review) {
+    public void deleteRatingWithReview(Review review) {
 
         Rating rating = ratingRepository.findAverageById(review.getPlaceId());
 
         int sum = (rating.getSum() - review.getMark().getId());
         int numb = rating.getNumber() - 1;
+
         double aveRage = (float) sum / (float) numb;
 
         rating.setAverage(Math.round(aveRage * 100.0) / 100.0);
