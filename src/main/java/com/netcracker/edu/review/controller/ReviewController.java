@@ -5,7 +5,7 @@ import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.service.MarkService;
-import com.netcracker.edu.review.service.RatingSevice;
+import com.netcracker.edu.review.service.RatingService;
 import com.netcracker.edu.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class ReviewController {
     public MarkService markService;
 
     @Autowired
-    public RatingSevice ratingSevice;
+    public RatingService ratingService;
 
     @PostMapping("/review")
     public ResponseEntity<Review> createReview(@RequestBody UiReview uiReview, Mark mark) {
@@ -63,8 +63,8 @@ public class ReviewController {
     }
 
     @GetMapping("/review/tenbestplace")
-    public ResponseEntity<List<Rating>> sortTenList(){
-        return ResponseEntity.ok(ratingSevice.sortTenList());
+    public ResponseEntity<List<Rating>> sortTenList() {
+        return ResponseEntity.ok(ratingService.sortTenList());
     }
 
 

@@ -1,6 +1,5 @@
 package com.netcracker.edu.review.model;
 
-
 import lombok.Data;
 
 import javax.persistence.Column;

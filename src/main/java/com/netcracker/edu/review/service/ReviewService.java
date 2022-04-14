@@ -26,7 +26,7 @@ public class ReviewService {
     private MarkService markService;
 
     @Autowired
-    private RatingSevice ratingSevice;
+    private RatingService ratingService;
 
     @Value("${count-of-reviews.size-of-page}")
     public int sizeOfPage;
@@ -39,9 +39,9 @@ public class ReviewService {
         mark = markService.findMarkByValue(uiReview.getMark());
 
         if (uiReview.getMark() != null) {
-            ratingSevice.setRating(uiReview, mark);
+            ratingService.setRating(uiReview, mark);
         }
-        ratingSevice.sortTenList();
+        ratingService.sortTenList();
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
@@ -79,7 +79,7 @@ public class ReviewService {
             review.setReview(uiReviewUpdated.getReview());
         }
         if (uiReviewUpdated.getMark() != null) {
-            ratingSevice.updateRatingWithReview(review, mark);
+            ratingService.updateRatingWithReview(review, mark);
             review.setMark(mark);
         }
         review.setDateEdit(new Date());
@@ -92,7 +92,7 @@ public class ReviewService {
             throw new ReviewNotFoundException();
         } else {
             Review review = reviewRepository.findById(id).get();
-            ratingSevice.deleteRatingWithReview(review);
+            ratingService.deleteRatingWithReview(review);
             reviewRepository.deleteById(id);
         }
     }

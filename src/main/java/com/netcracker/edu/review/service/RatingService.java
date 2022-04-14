@@ -1,6 +1,5 @@
 package com.netcracker.edu.review.service;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.netcracker.edu.review.model.Mark;
 import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RatingSevice {
+public class RatingService {
 
     @Autowired
     private RatingRepository ratingRepository;
