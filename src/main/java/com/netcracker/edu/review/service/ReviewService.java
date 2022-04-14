@@ -25,6 +25,7 @@ public class ReviewService {
     @Autowired
     private MarkService markService;
 
+
     @Autowired
     private RatingSevice ratingSevice;
 
@@ -32,6 +33,7 @@ public class ReviewService {
     public int sizeOfPage;
 
     @Value("${count-of-reviews.date-creation}")
+
     public String dateOfCreation;
 
     public Review createReview(UiReview uiReview, Mark mark) {
@@ -44,6 +46,7 @@ public class ReviewService {
         ratingSevice.sortTenList();
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
+
 
     public List<Review> findReviewByAuthorId(int authorId, int page) {
         Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());

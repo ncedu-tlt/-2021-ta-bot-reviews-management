@@ -31,20 +31,22 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(uiReview, mark));
     }
 
-    @GetMapping("/review/{authorId}/{page}")
+
+    @GetMapping("/review/author/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByAuthorId(@PathVariable("authorId") int authorId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByAuthorId(authorId, page));
     }
+
 
     @GetMapping("/review/place/{placeId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceId(@PathVariable("placeId") int placeId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByPlaceId(placeId, page));
     }
 
+
     @GetMapping("/review/place/{placeId}/author/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceIdAndAuthorId(@PathVariable("placeId") int placeId, @PathVariable("authorId") int authorId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByPlaceIdandAuthorId(placeId, authorId, page));
-    }
 
     @PutMapping("/review/{id}")
     public ResponseEntity<Review> updateReviewById(@PathVariable("id") int id, @RequestBody UiReview uiReviewUpdated, Mark mark) {
@@ -66,6 +68,4 @@ public class ReviewController {
     public ResponseEntity<List<Rating>> sortTenList(){
         return ResponseEntity.ok(ratingSevice.sortTenList());
     }
-
-
 }
