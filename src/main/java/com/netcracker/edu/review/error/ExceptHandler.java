@@ -12,14 +12,14 @@ public class ExceptHandler {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String reviewNotFoundException (ReviewNotFoundException reviewNotFoundException){
+    String reviewNotFoundException(ReviewNotFoundException reviewNotFoundException) {
         return reviewNotFoundException.getMessage();
     }
 
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String ReviewByRatingNotFoundException (ReviewByRatingNotFoundException reviewByRatingNotFoundException){
+    String ReviewByRatingNotFoundException(ReviewByRatingNotFoundException reviewByRatingNotFoundException) {
         return reviewByRatingNotFoundException.getMessage();
     }
 }

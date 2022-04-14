@@ -17,15 +17,20 @@ public class Rating {
     @Id
     private int id;
 
-    @Column (name = "sum")
+    @Column(name = "sum")
     private int sum;
 
-    @Column (name = "number")
+    @Column(name = "number")
     private int number;
 
-    @Column (name = "average")
-    private double average;
+    @Column(name = "posscore")
+    private int posscore;
 
+    @Column(name = "negscore")
+    private int negscore;
+
+    @Column(name = "average")
+    private double average;
 
 
 }

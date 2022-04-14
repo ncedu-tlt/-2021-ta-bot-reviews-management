@@ -10,6 +10,8 @@ public class MarkService {
     @Autowired
     MarkRepository markRepository;
 
-    public Mark findMarkByValue(String value){return markRepository.findMarkByValue(value);}
+    public Mark findMarkByValue(String value) {
+        return markRepository.findMarkByValue(value);
+    }
 
 }

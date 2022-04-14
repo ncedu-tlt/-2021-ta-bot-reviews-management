@@ -1,9 +1,11 @@
 package com.netcracker.edu.review.controller;
 
 import com.netcracker.edu.review.model.Mark;
+import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.service.MarkService;
+import com.netcracker.edu.review.service.RatingSevice;
 import com.netcracker.edu.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,9 @@ public class ReviewController {
     @Autowired
     public MarkService markService;
 
+    @Autowired
+    public RatingSevice ratingSevice;
+
     @PostMapping("/review")
     public ResponseEntity<Review> createReview(@RequestBody UiReview uiReview, Mark mark) {
         return ResponseEntity.ok(reviewService.createReview(uiReview, mark));
@@ -31,12 +36,12 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.findReviewByAuthorId(authorId, page));
     }
 
-    @GetMapping("/review/{placeId}/{page}")
+    @GetMapping("/review/place/{placeId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceId(@PathVariable("placeId") int placeId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByPlaceId(placeId, page));
     }
 
-    @GetMapping("/review/{placeId}/{authorId}/{page}")
+    @GetMapping("/review/place/{placeId}/author/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceIdAndAuthorId(@PathVariable("placeId") int placeId, @PathVariable("authorId") int authorId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByPlaceIdandAuthorId(placeId, authorId, page));
     }
@@ -52,9 +57,15 @@ public class ReviewController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/review/{markId}/{page}")
-    public ResponseEntity<List<Review>> sortedByRating(@PathVariable("markId") int markId, @PathVariable("page") int page){
+    @GetMapping("/review/mark/{markId}/{page}")
+    public ResponseEntity<List<Review>> sortedByRating(@PathVariable("markId") int markId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByMarkId(markId, page));
     }
+
+    @GetMapping("/review/tenbestplace")
+    public ResponseEntity<List<Rating>> sortTenList(){
+        return ResponseEntity.ok(ratingSevice.sortTenList());
+    }
+
 
 }
