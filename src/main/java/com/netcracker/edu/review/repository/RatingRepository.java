@@ -11,6 +11,10 @@ import java.util.List;
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
     Rating findAverageById(int id);
 
-    @Query(value = "SELECT * from Rating R order by R.average desc limit 10", nativeQuery = true)
+    @Query(value = "SELECT *" +
+            "from rating r\n" +
+            "         left join comment on r.id = comment.place_id\n" +
+            "where comment.date_creation >= (current_date - interval '30' day)\n" +
+            "order by r.average desc limit 10", nativeQuery = true)
     List<Rating> findRatingByAverage();
 }
