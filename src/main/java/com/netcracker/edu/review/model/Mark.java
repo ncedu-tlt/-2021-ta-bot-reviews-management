@@ -1,6 +1,7 @@
 package com.netcracker.edu.review.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 
 @Data
@@ -23,5 +24,6 @@ public class Mark {
         setId(id);
         setValue(value);
     }
+
 
 }
