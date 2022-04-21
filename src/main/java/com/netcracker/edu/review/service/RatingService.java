@@ -5,10 +5,12 @@ import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.RatingRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 public class RatingService {
@@ -120,15 +122,15 @@ public class RatingService {
 
     public List<Rating> sortTenList() {
         List<Rating> rating = ratingRepository.findRatingByAverage();
-        Rating rating1;
 
         //пересчет в процентное соотношение
         for (int i = 0; i < rating.size(); i++) {
-            rating1 = rating.get(i);
+            Rating rating1 = rating.get(i);
             rating1.setPosscore(rating1.getPosscore() * 100 / rating1.getNumber());
             rating1.setNegscore(rating1.getNegscore() * 100 / rating1.getNumber());
             rating.set(i, rating1);
         }
+
 
         return rating;
     }

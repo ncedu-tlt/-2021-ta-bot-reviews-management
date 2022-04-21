@@ -43,7 +43,6 @@ public class ReviewService {
         if (uiReview.getMark() != null) {
             ratingService.setRating(uiReview, mark);
         }
-        ratingService.sortTenList();
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
     }
 
