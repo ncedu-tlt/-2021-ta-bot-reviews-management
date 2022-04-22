@@ -98,9 +98,9 @@ public class ReviewService {
         }
     }
 
-    public List<Review> findReviewByMarkId(int markId, int page) {
+    public List<Review> findReviewByPlaceIdAndMark_Id(int placeId, int markId, int page) {
         Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
-        List<Review> review = reviewRepository.findReviewByMark_Id(markId, pageable);
+        List<Review> review = reviewRepository.findReviewByPlaceIdAndMark_Id(placeId, markId, pageable);
         if (review.isEmpty()) {
             throw new ReviewByRatingNotFoundException(Integer.toString(markId));
         } else return review;

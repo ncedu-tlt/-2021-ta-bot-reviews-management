@@ -22,7 +22,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(uiReview));
     }
 
-    @GetMapping("/review/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<Review>> findReviewById(@PathVariable("id") int id) {
         return ResponseEntity.ok(reviewService.findReviewByReviewId(id));
     }
@@ -39,7 +39,7 @@ public class ReviewController {
     }
 
 
-    @GetMapping("/place/{placeId}/author/{authorId}/{page}")
+    @GetMapping("/place/{placeId}/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByPlaceIdAndAuthorId(@PathVariable("placeId") int placeId, @PathVariable("authorId") int authorId, @PathVariable("page") int page) {
         return ResponseEntity.ok(reviewService.findReviewByPlaceIdandAuthorId(placeId, authorId, page));
     }
@@ -55,9 +55,9 @@ public class ReviewController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/mark/{markId}/{page}")
-    public ResponseEntity<List<Review>> sortedByRating(@PathVariable("markId") int markId, @PathVariable("page") int page) {
-        return ResponseEntity.ok(reviewService.findReviewByMarkId(markId, page));
+    @GetMapping("/place/mark/{placeId}/{markId}/{page}")
+    public ResponseEntity<List<Review>> sortedByRating(@PathVariable("placeId") int placeId, @PathVariable("markId") int markId, @PathVariable("page") int page) {
+        return ResponseEntity.ok(reviewService.findReviewByPlaceIdAndMark_Id(placeId, markId, page));
     }
 
 
