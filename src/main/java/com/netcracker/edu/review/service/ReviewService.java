@@ -56,10 +56,6 @@ public class ReviewService {
     }
 
 
-    public List<Review> findReviewByReviewId(int id) {
-
-        return reviewRepository.findReviewById(id);}
-
     public List<Review> findReviewByPlaceId(int placeId, int page) {
         Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
         List<Review> reviews = reviewRepository.findReviewByPlaceId(placeId, pageable);
