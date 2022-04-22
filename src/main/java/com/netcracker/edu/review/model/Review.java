@@ -2,6 +2,7 @@ package com.netcracker.edu.review.model;
 
 import com.netcracker.edu.review.model.ui.UiReview;
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class Review {
     @Column(name = "date_edit")
     private Date dateEdit = null;
 
-    @Column(name= "place_id")
+    @Column(name = "place_id")
     private int placeId;
 
     public Review() {
