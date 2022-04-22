@@ -135,8 +135,8 @@ public class RatingService {
         return rating;
     }
 
-    public List<Rating> findPopularPlace(int[] param) {
-        return ratingRepository.findRatingById(param);
+    public List<Rating> findPopularPlace(int[] placeId) {
+        return ratingRepository.findRatingById(placeId);
     }
 }
 

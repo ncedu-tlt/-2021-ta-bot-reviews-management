@@ -22,8 +22,8 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.sortTenList());
     }
 
-    @GetMapping("/topplaces")
-    public ResponseEntity<List<Rating>> findPopularPlace(@RequestBody int placeId[]) {
+    @PostMapping("/topplaces")
+    public ResponseEntity<List<Rating>> findPopularPlace(@RequestBody int[] placeId) {
         return ResponseEntity.ok(ratingService.findPopularPlace(placeId));
     }
 }
