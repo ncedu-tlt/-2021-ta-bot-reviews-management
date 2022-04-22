@@ -22,6 +22,10 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(uiReview));
     }
 
+    @GetMapping("/review/{id}")
+    public ResponseEntity<List<Review>> findReviewById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(reviewService.findReviewByReviewId(id));
+    }
 
     @GetMapping("/author/{authorId}/{page}")
     public ResponseEntity<List<Review>> findReviewByAuthorId(@PathVariable("authorId") int authorId, @PathVariable("page") int page) {

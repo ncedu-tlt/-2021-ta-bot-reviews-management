@@ -19,22 +19,17 @@ import java.util.List;
 @Service
 public class ReviewService {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
-
-    @Autowired
-    private MarkService markService;
-
-
-    @Autowired
-    private RatingService ratingService;
-
     @Value("${count-of-reviews.size-of-page}")
     public int sizeOfPage;
-
     @Value("${count-of-reviews.date-creation}")
 
     public String dateOfCreation;
+    @Autowired
+    private ReviewRepository reviewRepository;
+    @Autowired
+    private MarkService markService;
+    @Autowired
+    private RatingService ratingService;
 
     public Review createReview(UiReview uiReview) {
 
@@ -44,6 +39,10 @@ public class ReviewService {
             ratingService.setRating(uiReview, mark);
         }
         return reviewRepository.saveAndFlush(new Review(uiReview, mark));
+    }
+
+    public List<Review> findReviewByReviewId(int id) {
+        return reviewRepository.findReviewById(id);
     }
 
 

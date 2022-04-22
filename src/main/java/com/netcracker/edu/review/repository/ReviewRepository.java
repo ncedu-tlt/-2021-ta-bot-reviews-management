@@ -20,4 +20,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     List<Review> findReviewByPlaceIdAndAuthorId(int placeId, int authorId, Pageable pageable);
 
     List<Review> findReviewByMark_Id(int markId, Pageable pageable);
+
+    List<Review> findReviewById(int id);
 }
