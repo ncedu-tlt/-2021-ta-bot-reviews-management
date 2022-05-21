@@ -1,16 +1,14 @@
-package com.netcracker.edu.review.service;
+package com.netcracker.edu.review.controllers;
 
 import com.netcracker.edu.review.model.Mark;
 import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.RatingRepository;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Service
 public class RatingService {
@@ -123,7 +121,17 @@ public class RatingService {
     public List<Rating> sortTenList() {
         List<Rating> rating = ratingRepository.findRatingByAverage();
 
-        //пересчет в процентное соотношение
+        return ratingPersent(rating);
+    }
+
+    public List<Rating> findPopularPlace(int[] placeId) {
+
+        List<Rating> rating = ratingRepository.findRatingById(placeId);
+
+        return ratingPersent(rating);
+    }
+
+    private List<Rating> ratingPersent(List<Rating> rating) {
         for (int i = 0; i < rating.size(); i++) {
             Rating rating1 = rating.get(i);
             rating1.setPosscore(rating1.getPosscore() * 100 / rating1.getNumber());
@@ -131,12 +139,7 @@ public class RatingService {
             rating.set(i, rating1);
         }
 
-
         return rating;
-    }
-
-    public List<Rating> findPopularPlace(int[] placeId) {
-        return ratingRepository.findRatingById(placeId);
     }
 }
 
