@@ -2,7 +2,7 @@ package com.netcracker.edu.review.controller;
 
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
-import com.netcracker.edu.review.service.ReviewService;
+import com.netcracker.edu.review.controllers.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

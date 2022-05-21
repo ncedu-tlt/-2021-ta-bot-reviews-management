@@ -1,4 +1,4 @@
-package com.netcracker.edu.review.service;
+package com.netcracker.edu.review.controllers;
 
 import com.netcracker.edu.review.model.Mark;
 import com.netcracker.edu.review.repository.MarkRepository;

@@ -1,16 +1,14 @@
-package com.netcracker.edu.review.service;
+package com.netcracker.edu.review.controllers;
 
 import com.netcracker.edu.review.model.Mark;
 import com.netcracker.edu.review.model.Rating;
 import com.netcracker.edu.review.model.Review;
 import com.netcracker.edu.review.model.ui.UiReview;
 import com.netcracker.edu.review.repository.RatingRepository;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Service
 public class RatingService {
@@ -130,7 +128,6 @@ public class RatingService {
             rating1.setNegscore(rating1.getNegscore() * 100 / rating1.getNumber());
             rating.set(i, rating1);
         }
-
 
         return rating;
     }

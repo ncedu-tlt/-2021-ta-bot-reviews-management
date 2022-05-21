@@ -1,4 +1,4 @@
-package com.netcracker.edu.review.service;
+package com.netcracker.edu.review.controllers;
 
 import com.netcracker.edu.review.error.ReviewByRatingNotFoundException;
 import com.netcracker.edu.review.error.ReviewNotFoundException;
@@ -22,8 +22,8 @@ public class ReviewService {
     @Value("${count-of-reviews.size-of-page}")
     public int sizeOfPage;
     @Value("${count-of-reviews.date-creation}")
-
     public String dateOfCreation;
+
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired

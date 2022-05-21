@@ -1,4 +1,4 @@
-package com.netcracker.edu.review.service;
+package com.netcracker.edu.review.controllers;
 
 public enum Score {
     excellent(5),

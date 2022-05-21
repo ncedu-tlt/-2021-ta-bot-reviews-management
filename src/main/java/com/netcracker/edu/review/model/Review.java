@@ -34,6 +34,8 @@ public class Review {
     @Column(name = "place_id")
     private int placeId;
 
+
+
     public Review() {
     }
 
