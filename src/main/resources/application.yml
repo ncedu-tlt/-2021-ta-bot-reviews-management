@@ -18,9 +18,11 @@ spring:
       idle-timeout: 30000
       connection-timeout: 10000
       pool-name: HikariPool
+
 server:
   port: 8088
 
 countOfReviews:
   size-of-page: 5
-  date-creation: dateCreation
+  date-creation: date_creation
+  date-of-creation: dateCreation

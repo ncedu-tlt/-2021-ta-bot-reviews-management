@@ -23,6 +23,8 @@ public class ReviewService {
     public int sizeOfPage;
     @Value("${count-of-reviews.date-creation}")
     public String dateOfCreation;
+    @Value("${count-of-reviews.date-of-creation}")
+    public String dateCreation;
 
     @Autowired
     private ReviewRepository reviewRepository;
@@ -47,7 +49,7 @@ public class ReviewService {
 
 
     public List<Review> findReviewByAuthorId(int authorId, int page) {
-        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateCreation).descending());
         List<Review> review = reviewRepository.findReviewByAuthorId(authorId, pageable);
         if (review.isEmpty()) {
             throw new ReviewNotFoundException();
@@ -64,7 +66,7 @@ public class ReviewService {
     }
 
     public List<Review> findReviewByPlaceIdandAuthorId(int placeId, int authorId, int page) {
-        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateCreation).descending());
         List<Review> review = reviewRepository.findReviewByPlaceIdAndAuthorId(placeId, authorId, pageable);
         if (review.isEmpty()) {
             throw new ReviewNotFoundException();
@@ -99,7 +101,7 @@ public class ReviewService {
     }
 
     public List<Review> findReviewByPlaceIdAndMark_Id(int placeId, int markId, int page) {
-        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateOfCreation).descending());
+        Pageable pageable = PageRequest.of(page, sizeOfPage, Sort.by(dateCreation).descending());
         List<Review> review = reviewRepository.findReviewByPlaceIdAndMark_Id(placeId, markId, pageable);
         if (review.isEmpty()) {
             throw new ReviewByRatingNotFoundException(Integer.toString(markId));
